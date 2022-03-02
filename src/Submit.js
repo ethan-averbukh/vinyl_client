@@ -12,8 +12,9 @@ const Submit = ({ handlePOSTSubmit }) => {
       setAlbum(e.target.value);
   }
 
-  const handleSubmit = () => {
-    handlePOSTSubmit(album, artist);
+  const handleSubmit = (e) => {
+      e.preventDefault();
+    handlePOSTSubmit(artist, album);
   };
 
   return (
