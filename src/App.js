@@ -13,11 +13,12 @@ function App() {
     setVinylData(apiData);
     console.log(apiData);
   };
-  const handlePOSTCall = async( artistInput, albumInput) => {
+  const handlePOSTCall = async({artist,album}) => {
+    
     try{
     const response = await axios.post("http://localhost:3000/vinyls", {
-      artists: artistInput,
-      album: albumInput
+      artists: artist,
+      album: album
     });
     const postedData = await response.data;
     console.log(postedData);

@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 
 const Submit = ({ handlePOSTSubmit }) => {
-  const [album, setAlbum] = useState("");
-  const [artist, setArtist] = useState("");
+ 
+  const [vinyl, setVinyl] = useState({artist: "", album: ""})
 
-  const handleArtistChange = (e) => {
-      setArtist(e.target.value);
-  }
-
-  const handleAlbumChange = (e) => {
-      setAlbum(e.target.value);
+  const handleChange = event => {
+    event.persist()
+    setVinyl(prevVinyl => {
+      const editedVinyl = {...prevVinyl, 
+        [event.target.name]: event.target.value}
+      return editedVinyl
+    })
   }
 
   const handleSubmit = (e) => {
       e.preventDefault();
-    handlePOSTSubmit(artist, album);
+      console.log(vinyl);
+    handlePOSTSubmit(vinyl);
   };
 
   return (
@@ -27,7 +29,7 @@ const Submit = ({ handlePOSTSubmit }) => {
             id="artist"
             name="artist"
             placeholder="Enter Artist"
-            onChange={handleArtistChange}
+            onChange={handleChange}
           />
         </div>
         <div className="field">
@@ -37,7 +39,7 @@ const Submit = ({ handlePOSTSubmit }) => {
             id="album"
             name="album"
             placeholder="Enter Album"
-            onChange={handleAlbumChange}
+            onChange={handleChange}
           />
         </div>
         <input type="submit" />
